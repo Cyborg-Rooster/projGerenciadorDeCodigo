@@ -167,8 +167,6 @@
             // ckbGoogle
             // 
             this.ckbGoogle.AutoSize = true;
-            this.ckbGoogle.Checked = true;
-            this.ckbGoogle.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckbGoogle.ForeColor = System.Drawing.SystemColors.GrayText;
             this.ckbGoogle.Location = new System.Drawing.Point(47, 448);
             this.ckbGoogle.Name = "ckbGoogle";

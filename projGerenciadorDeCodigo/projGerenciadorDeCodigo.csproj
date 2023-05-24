@@ -8,6 +8,8 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Gerenciador de Site</AssemblyName>
     <ApplicationIcon>favicon.ico</ApplicationIcon>
+    <Version>1.0.3</Version>
+    <Company>LTB Marketing Digital</Company>
   </PropertyGroup>
 
   <ItemGroup>

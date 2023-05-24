@@ -48,10 +48,15 @@ namespace projGerenciadorDeCodigo
         private bool ValidateFormsData()
         {
             if (!ckbCanonical.Checked && !ckbGoogle.Checked && !ckbMobirise.Checked &&
-                !ckbSitemap.Checked) return false; 
-            else if (ckbCanonical.Checked && txtSiteName.Text == string.Empty || ckbSitemap.Checked && txtSiteName.Text == string.Empty) return false; 
-            else if (txtDirectory.Text == string.Empty) return false; 
-            else return true;
+                !ckbSitemap.Checked) return false;
+            else if (ckbCanonical.Checked && txtSiteName.Text == string.Empty || ckbSitemap.Checked && txtSiteName.Text == string.Empty) return false;
+            else if (txtDirectory.Text == string.Empty) return false;
+            else 
+            {
+                if (txtSiteName.Text != string.Empty && txtSiteName.Text[txtSiteName.Text.Length - 1] == '/') 
+                    txtSiteName.Text = txtSiteName.Text.Remove(txtSiteName.Text.Length - 1);
+                return true; 
+            }
         }
 
         private void OnLinkClicked(object sender, LinkLabelLinkClickedEventArgs e)

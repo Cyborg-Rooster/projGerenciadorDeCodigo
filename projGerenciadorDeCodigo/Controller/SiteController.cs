@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -37,7 +38,8 @@ namespace projGerenciadorDeCodigo.Controller
         {
             foreach(var file in fileNames)
             {
-                if (file != "google8e97f3aebffc65ea.html")
+                string verification = file.Substring(0, 6);
+                if (verification != "google")
                 {
                     if (canonical) AddCanonicalTag(file);
                     if (mobirise) RemoveMobiriseWaterMark(file);
@@ -55,14 +57,19 @@ namespace projGerenciadorDeCodigo.Controller
 
         private void AddCanonicalTag(string fileName)
         {
-            string content = File.ReadAllText(Uri + @"\" + fileName);
-            string tag = "<link rel=\"canonical\" href=\"" + Url + "/" + fileName + "/" + "\" " + ">";
-            content = content.Replace("<head>", "<head>\n  " + tag);
-            File.WriteAllText(Uri + @"\" + fileName, content);
+            if (fileName.IndexOf("<link rel=\"canonical\"") == -1)
+            {
+                string content = File.ReadAllText(Uri + @"\" + fileName);
+                string tag = "<link rel=\"canonical\" href=\"" + Url + "/" + fileName + "\" " + ">";
+                content = content.Replace("<head>", "<head>\n  " + tag);
+                File.WriteAllText(Uri + @"\" + fileName, content);
+            }
+            
         }
 
         private void RemoveMobiriseWaterMark(string fileName)
         {
+            
             string content = File.ReadAllText(Uri + @"\" + fileName);
             int indiceInicial = content.IndexOf("<section class=\"display-7\"");
             int indiceFinal = content.LastIndexOf("</a></section>") + "</a></section>".Length;
@@ -73,6 +80,7 @@ namespace projGerenciadorDeCodigo.Controller
 
             content = content.Replace(substring, tag);
             File.WriteAllText(Uri + @"\" + fileName, content);
+            
         }
 
         private void AddGoogleVerification()
@@ -92,9 +100,13 @@ namespace projGerenciadorDeCodigo.Controller
 
             foreach(var file in fileNames)
             {
-                content += $"<url>\r\n  <loc>{Url}/{file}/</loc>\r\n  " +
-                "<lastmod>2023-03-13T01:24:33+00:00</lastmod>\r\n  " +
-                "<priority>1.00</priority>\r\n</url>";
+                string verification = file.Substring(0, 6);
+                if (verification != "google")
+                {
+                    content += $"<url>\r\n  <loc>{Url}/{file}</loc>\r\n  " +
+                    "<lastmod>2023-03-13T01:24:33+00:00</lastmod>\r\n  " +
+                    "<priority>1.00</priority>\r\n</url>";
+                }
             }
 
             content += "\r\n</urlset>";
