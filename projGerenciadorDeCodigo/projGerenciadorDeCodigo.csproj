@@ -7,13 +7,15 @@
     <UseWindowsForms>true</UseWindowsForms>
     <ImplicitUsings>enable</ImplicitUsings>
     <AssemblyName>Gerenciador de Site</AssemblyName>
-    <ApplicationIcon>favicon.ico</ApplicationIcon>
-    <Version>1.0.3</Version>
+    <ApplicationIcon>code.ico</ApplicationIcon>
+    <Version>1.1.0</Version>
+    <Authors>Enrique</Authors>
     <Company>LTB Marketing Digital</Company>
+    <Description>App que faz mudanças no código fonte do site.</Description>
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="favicon.ico" />
+    <Content Include="code.ico" />
   </ItemGroup>
 
 </Project>

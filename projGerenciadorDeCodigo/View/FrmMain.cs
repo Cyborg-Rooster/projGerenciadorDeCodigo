@@ -10,13 +10,14 @@ namespace projGerenciadorDeCodigo
         public FrmMain()
         {
             InitializeComponent();
+            lblNVersion.Text = $"v{Application.ProductVersion}";
         }
 
         private void OnButtonSearchClicked(object sender, EventArgs e)
         {
             var dialog = new FolderBrowserDialog();
             DialogResult result = dialog.ShowDialog();
-            if(result == DialogResult.OK) 
+            if (result == DialogResult.OK)
             {
                 rootFolder = dialog.SelectedPath;
                 txtDirectory.Text = rootFolder;
@@ -37,7 +38,8 @@ namespace projGerenciadorDeCodigo
                         ckbGoogle.Checked,
                         ckbSitemap.Checked
                     );
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message, "Erro", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
@@ -51,11 +53,11 @@ namespace projGerenciadorDeCodigo
                 !ckbSitemap.Checked) return false;
             else if (ckbCanonical.Checked && txtSiteName.Text == string.Empty || ckbSitemap.Checked && txtSiteName.Text == string.Empty) return false;
             else if (txtDirectory.Text == string.Empty) return false;
-            else 
+            else
             {
-                if (txtSiteName.Text != string.Empty && txtSiteName.Text[txtSiteName.Text.Length - 1] == '/') 
+                if (txtSiteName.Text != string.Empty && txtSiteName.Text[txtSiteName.Text.Length - 1] == '/')
                     txtSiteName.Text = txtSiteName.Text.Remove(txtSiteName.Text.Length - 1);
-                return true; 
+                return true;
             }
         }
 
